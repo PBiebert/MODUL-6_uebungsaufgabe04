@@ -22,6 +22,13 @@ def employee_overview(request):
     employees_before_2021 = Employee.objects.filter(
         hire_date__lte=date(2021, 1, 1)
     ).exclude(department__name='HR').values('name', 'department__name', 'hire_date')
-    print(employees_before_2021)
 
-    return render(request, 'employee_list.html', {'worker_list': worker_list, 'hight_salary': hight_salary, 'number_hight_salary': number_hight_salary, 'all_emloyee_sales': all_emloyee_sales, 'employees_before_2021': employees_before_2021})
+    context = {
+        'worker_list': worker_list,
+        'hight_salary': hight_salary,
+        'number_hight_salary': number_hight_salary,
+        'all_emloyee_sales': all_emloyee_sales,
+        'employees_before_2021': employees_before_2021
+    }
+
+    return render(request, 'employee_list.html', context)
