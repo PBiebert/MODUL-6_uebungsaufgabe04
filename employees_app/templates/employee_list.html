@@ -1,27 +1,105 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Staff Filter App</title>
+
+    <style>
+      table {
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        text-align: left;
+        padding: 0.5rem 1rem 0.5rem 0.2rem;
+        border: 1px solid black;
+      }
+    </style>
   </head>
   <body>
     <h1>Staff Filter App</h1>
 
     <h2>Aufgaben:</h2>
     <ol>
-      <li>Zeige hier im Template eine Liste aller Mitarbeiter, ihrer Abteilung und ihres Gehalts an.</li>
-      <li>Zeige eine Liste der Namen aller Mitarbeiter, die mehr als 3000 € im Monat verdienen.</li>
-      <li>Wie hoch ist die Anzahl der Mitarbeiter, die 5000 € im Monat oder mehr verdienen?</li>
+      <li>
+        Zeige hier im Template eine Liste aller Mitarbeiter, ihrer Abteilung und
+        ihres Gehalts an.
+      </li>
+      <li>
+        Zeige eine Liste der Namen aller Mitarbeiter, die mehr als 3000 € im
+        Monat verdienen.
+      </li>
+      <li>
+        Wie hoch ist die Anzahl der Mitarbeiter, die 5000 € im Monat oder mehr
+        verdienen?
+      </li>
     </ol>
     <h3>Zusatzaufgaben:</h3>
     <ol start="4">
-      <li>Wie hoch ist das Durchschnittsgehalt aller Mitarbeiter im Sales-Team? Zeige das Ergebnis auf zwei Nachkommastellen gerundet an.</li>
-      <li>Welche Mitarbeiter wurden vor dem 1. Januar 2022 eingestellt und gehören NICHT zur Abteilung HR?</li>
+      <li>
+        Wie hoch ist das Durchschnittsgehalt aller Mitarbeiter im Sales-Team?
+        Zeige das Ergebnis auf zwei Nachkommastellen gerundet an.
+      </li>
+      <li>
+        Welche Mitarbeiter wurden vor dem 1. Januar 2022 eingestellt und gehören
+        NICHT zur Abteilung HR?
+      </li>
     </ol>
 
-    <h2 style="color:red">Antworten:</h2>
+    <h2 style="color: red">Antworten:</h2>
+    <h3>Aufgabe 1</h3>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Department</th>
+        <th>Salary</th>
+      </tr>
+      {% for worker in worker_list %}
+      <tr>
+        <td>{{worker.name}}</td>
+        <td>{{worker.department__name}}</td>
+        <td>{{worker.salary}} $</td>
+      </tr>
+      {% endfor %}
+    </table>
 
-    <!-- Hier eure Antworten rendern -->
+    <h3>Aufgabe 2 - Salary > 3000 $</h3>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Department</th>
+        <th>Salary</th>
+      </tr>
+      {% for worker in hight_salary %}
+      <tr>
+        <td>{{worker.name}}</td>
+        <td>{{worker.department__name}}</td>
+        <td>{{worker.salary}} $</td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <h3>Aufgabe 3 - Number of employees with a salary > 5000</h3>
+    <p>Number of employees = {{number_hight_salary}}</p>
+
+    <h3>Aufgabe 4 - average salary sales team</h3>
+    <p>Average Salary = {{all_emloyee_sales.salary__avg|floatformat:2}} $</p>
+
+    <h3>Aufgabe 5</h3>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Department</th>
+        <th>hire_date</th>
+      </tr>
+      {% for worker in employees_before_2021 %}
+      <tr>
+        <td>{{worker.name}}</td>
+        <td>{{worker.department__name}}</td>
+        <td>{{worker.hire_date}}</td>
+      </tr>
+      {% endfor %}
+    </table>
   </body>
 </html>
